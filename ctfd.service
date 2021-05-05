@@ -1,0 +1,18 @@
+[Unit]
+Description=Runs the CTFD server
+After=multi-user.target
+Conflicts=getty@tty1.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/akarsh/Documents/go/src/github.com/ctfd/ctfd/wsgi.py
+StandardInput=tty-force
+Restart=always
+User=sadm
+StartLimitIntervalSec=15s
+StartLimitBurst=1000000
+
+[Install]
+WantedBy=multi-user.target
+
+# tmux new-session -d -s ctfd \; send-keys "python3 wsgi.py" Enter
